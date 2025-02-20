@@ -1,0 +1,47 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+
+
+<!-- Cabecera -->
+
+
+
+<!-- Formulario de edicion -->
+            {%  if 'ok' in request.GET %}
+              <p><b> New document created</a>
+            {% endif %}
+
+            {%  if 'Nok' in request.GET %}
+              <p><b> "El documento que quiere generar ya existe en la base de datos"</a>
+            {% endif %}
+
+            {%  if 'error' in request.GET %}
+              <p><b> "Error en el ingreso de datos"</a>
+            {% endif %}
+
+            <form method="get">
+                {% csrf_token %}
+                <label for="PN">PN:</label>
+                <input type="text" name="PN" id="PN" value="{{ request.GET.PN }}">
+                <label for="Revision">Revision:</label>
+                <input type="text" name="Revision" id="Revision" value="{{ request.GET.Revision }}">
+                <button type="submit">Generar Nueva Revision</button>
+            </form>
+
+            {% if drawing %}
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Crear nueva revision</button>
+                </form>
+            {% endif %}
+
+<!-- Mensaje -->
+{% endblock %}
+
+

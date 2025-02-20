@@ -1,0 +1,86 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+
+<!-- Cabecera -->
+
+
+
+<!-- Data table -->
+
+<form method="get">
+    {{ form.project }}
+    <button type="submit">Filtrar</button>
+</form>
+
+<title>Drawings</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white; /* Fondo blanco para la tabla */
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+            color: black; /* Letras negras para las celdas */
+        }
+
+        th {
+            background-color: #f2f2f2; /* Color de fondo para las celdas de encabezado (opcional) */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Drawing Control Chart</h1>
+    <div style="height: 500px; overflow: auto;">
+        <table>
+            <thead>
+                <tr>
+                    <th>PN</th>
+                    <th>Descripción</th>
+                    <th>Revision</th>
+                    <th>Estado</th>
+                    <th>Ruta</th>
+                    <th>Proyectos</th>
+                    <th>Emisor</th>
+                    <th>Aprobador</th>
+                    <th>Fecha de Emisión</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for drawing in drawings %}
+                <tr>
+                    <td>{{ drawing.PN }}</td>
+                    <td>{{ drawing.Description }}</td>
+                    <td>{{ drawing.Revision }}</td>
+                    <td {% if drawing.Status == "Ready for review" %}style="color: red;"
+                        {% elif drawing.Status == "Sent for corrections" %}style="color: blue;"
+                        {% elif drawing.Status == "Proposal OK" %}style="color: green;"
+                        {% endif %}>
+                        {{ drawing.Status }}
+                    </td>
+                    <td>{{ drawing.ruta }}</td>
+                    <td>
+                        {% for project in drawing.proyecto.all %}
+                            {{ project.name }} {% if not forloop.last %}, {% endif %}  {% endfor %}
+                    </td>
+                    <td>{{ drawing.Emisor.username }}</td>  
+                    <td>{{ drawing.Aprobador.username }}</td> 
+                    <td>{{ drawing.date|date:"d/m/Y"}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+<!-- Mensaje -->
+
+{% endblock %}

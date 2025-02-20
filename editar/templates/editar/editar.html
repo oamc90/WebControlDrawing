@@ -1,0 +1,43 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+
+
+<!-- Cabecera -->
+
+
+
+<!-- Formulario de edicion -->
+            {%  if 'ok' in request.GET %}
+              <p><b> Document has been edited</a>
+            {% endif %}
+
+            {%  if 'error' in request.GET %}
+              <p><b> "Error en el ingreso de datos"</a>
+            {% endif %}
+
+            <form method="get">
+                {% csrf_token %}
+                <label for="PN">PN:</label>
+                <input type="text" name="PN" id="PN" value="{{ request.GET.PN }}">
+                <label for="Revision">Revisión:</label>
+                <input type="text" name="Revision" id="Revision" value="{{ request.GET.Revision }}">
+                <button type="submit">Buscar</button>
+            </form>
+
+            {% if drawing %}
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Guardar</button>
+                </form>
+            {% endif %}
+
+<!-- Mensaje -->
+{% endblock %}
+
+

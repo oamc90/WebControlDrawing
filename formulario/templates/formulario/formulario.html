@@ -1,0 +1,26 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+
+
+<!-- Cabecera -->
+
+
+
+<!-- Formulario de contacto -->
+            {%  if 'ok' in request.GET %}
+              <p><b> New document has been created</a>
+            {% endif %}
+            <form action="" method="POST">
+              {% csrf_token %}
+              <table>
+                {{formulario.as_table}}
+              </table>
+              <input type="submit" value="Agregar"/>
+            </form>
+<!-- Mensaje -->
+{% endblock %}
