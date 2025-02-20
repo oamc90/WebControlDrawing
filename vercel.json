@@ -1,0 +1,14 @@
+{
+    "builds" : [
+        {
+            "src": "WebControlDrawingChart/wsgi.py",
+            "use": "@vercel/python"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "WebControlDrawingChart/wsgi.py"
+        }
+    ]
+}
