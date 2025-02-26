@@ -9,7 +9,7 @@ class ProjectAdmin(admin.ModelAdmin):
 
 class DrawingAdmin(admin.ModelAdmin):
     readonly_fields= ( 'created', 'updated')
-    list_display= ('PN', 'Description','Revision', 'Status','ruta','Emisor__username','Aprobador__username', 'proyecto__name','date')
+    #list_display= ('PN', 'Description','Revision', 'Status','ruta','Emisor__username','Aprobador__username', 'proyecto__name','date')
     #ordering= ('author', 'publish')
     #search_fields=('title','content', 'author__username')
     list_filter= ('Emisor__username','proyecto__name')

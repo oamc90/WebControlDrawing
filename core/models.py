@@ -24,6 +24,7 @@ class Drawing(models.Model):
     Revision=models.CharField(max_length=10, default="A")
 
     estados = (
+        ('Not Started', 'Not Started'),
         ('Ready for review', 'Ready for review'),
         ('Sent for corrections', 'Sent for corrections'),
         ('Proposal OK', 'Proposal OK'),

@@ -3,6 +3,8 @@ from .form import EditarForm
 from core.models import Drawing
 from django.urls import reverse
 from django.http import Http404
+from django.core.mail import send_mail  # Importa la función para enviar correos
+from django.conf import settings  # Importa la configuración de Django
 
 
 def editar(request):
@@ -31,6 +33,18 @@ def editar(request):
 
         if form.is_valid():
             form.save()
+
+            # Envío de correo electrónico
+            asunto = f'Plano editado: {drawing.PN} - Revisión {drawing.Revision}'
+            mensaje = f'El plano {drawing.PN} con revisión {drawing.Revision} ha sido editado.\n\n '
+            #mensaje += f'Editado por: {drawing.Emisor}'
+            mensaje += f'Estado del documento: {drawing.Status}'
+
+            correo_desde = settings.EMAIL_HOST_USER  # Usa el correo configurado en settings.py
+            correo_destino = [drawing.Aprobador.email, drawing.Emisor.email]  # Reemplaza con el destinatario
+
+            send_mail(asunto, mensaje, correo_desde, correo_destino)
+
             return redirect(reverse('editar') + "?ok")  # Redirige en caso de éxito
 
     return render(request, 'editar/editar.html', {'form': form, 'drawing': drawing})

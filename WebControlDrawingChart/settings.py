@@ -81,8 +81,13 @@ WSGI_APPLICATION = 'WebControlDrawingChart.wsgi.app'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'NAME': 'ControlDrawingChart',
+        "CLIENT" :{
+            'host':'mongodb+srv://OMedina:<Mecanica2025>@cluster0.s28uu.mongodb.net/',
+            'username': 'OMedina',
+            'password': 'Mecanica2025',
+        }
     }
 }
 
@@ -130,3 +135,13 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# envio de correos
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'notifications.me.mirgor@gmail.com'  # Reemplaza con tu correo
+EMAIL_HOST_PASSWORD = 'bxyi nwzg xvgo tgsk'  # Reemplaza con tu contraseña
+EMAIL_USE_TLS= True
