@@ -1,5 +1,5 @@
-Django
-whitenoise
+Django==5.1.6
+whitenoise==6.9.0
 djongo
 dnspython
 pymongo
