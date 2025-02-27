@@ -2,5 +2,5 @@ Django==4.1.13
 djongo
 dnspython
 pymongo
-whitenoise==6.9.0
+whitenoise
 pytz
